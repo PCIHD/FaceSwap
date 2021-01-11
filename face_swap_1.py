@@ -6,6 +6,7 @@ import logging
 import os
 import time
 from flask import Flask,request, jsonify
+from flask import send_file
 from flask_cors import CORS
 from face_detection import *
 from PIL import Image
@@ -320,16 +321,9 @@ def face_swap():
         #             new_image[y, x, c] = np.clip(alpha * final_img[y, x, c] + beta, 0, 255)
         cv2.imwrite(out_image_name, final_img)
 #        response.headers.add('Access-Control-Allow-Origin', '*')
-        return jsonify({
-	     'done': 'True',
-             'FileName':out_image_name,
-             #'ByTeArray':encoded_string
-             'Message':'',
-             'skinToneRGB': str(round(skinTone_R)) + ',' + str(round(skinTone_G)) + ',' + str(round(skinTone_B))
-           })
-    else:
-        dct = {'code':400, 'Message':"Pleaase change the method to POST"}
-        return dict
+
+        return send_file(out_image_name, as_attachment=True)
+
 
 if __name__=="__main__":
     app.run()
