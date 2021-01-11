@@ -237,12 +237,15 @@ def best_skin(frame):
 
 @app.route("/face_swap",methods=['POST'])
 def face_swap():
+
     if request.method == "POST":
         random_No_Image = time.time()
-        if request.files:
-            image = request.files["image"]
-            print(type(image))
-            image.save("InputImage_"+str(random_No_Image)+".jpg")
+
+        nparr = np.fromstring(request.data, np.uint8)
+            # decode image
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        src_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
         src_img = cv2.imread("InputImage_" + str(random_No_Image) + ".jpg")
 #        response = df.get_detectedFace(random_No_Image)
         correct_color = False
