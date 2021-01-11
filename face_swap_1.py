@@ -11,10 +11,12 @@ from face_detection import *
 from PIL import Image
 import statistics
 from color_matching import *
+from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__, static_url_path='')
 app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app, resources={r"/api/GetDetectedFace": {"origins": "*"}})## 3D Transform
+run_with_ngrok(app)
 
 def bilinear_interpolate(img, coords):
     """ Interpolates over every image channel
