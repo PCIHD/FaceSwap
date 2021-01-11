@@ -246,7 +246,7 @@ def face_swap():
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         src_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        src_img = cv2.imread("InputImage_" + str(random_No_Image) + ".jpg")
+
 #        response = df.get_detectedFace(random_No_Image)
         correct_color = False
         warp_2d = False
